@@ -89,6 +89,7 @@
       z-index: 10;
       position: relative;
       animation: fadeIn 0.5s ease-in-out;
+      display: block;
     }
 
     @keyframes fadeIn {
@@ -392,10 +393,9 @@
 </head>
 <body>
 
-  <!-- Background Music Audio -->
+  <!-- Background Music: strictly Thooriga..mp3 -->
   <audio id="bgMusic" loop preload="auto">
     <source src="Thooriga..mp3" type="audio/mpeg">
-    <source src="https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f792cb.mp3?filename=happy-birthday-to-you-124037.mp3" type="audio/mpeg">
   </audio>
 
   <!-- Music toggle button -->
@@ -411,7 +411,8 @@
     <div class="mini-avatar-container">
       <img class="mini-avatar-img" 
            src="Image%20(11).jfif.jfif" 
-           alt="Kamali Cartoon">
+           alt="Kamali Cartoon"
+           onerror="this.src='https://cdn-icons-png.flaticon.com/512/4521/4521931.png';">
     </div>
 
     <p>A little surprise journey is waiting for you... Ready to unlock it?</p>
@@ -561,7 +562,8 @@
         const screen = document.getElementById('screen' + i);
         if (screen) screen.classList.add('hidden');
       }
-      document.getElementById('screen' + stepNumber).classList.remove('hidden');
+      const target = document.getElementById('screen' + stepNumber);
+      if (target) target.classList.remove('hidden');
     }
 
     // Playful dodge for "No" button
@@ -626,7 +628,6 @@
       poppedCount++;
       document.getElementById('balloonCounter').innerText = `${poppedCount} / ${totalBalloons} popped`;
 
-      // Mini burst on pop
       confetti({
         particleCount: 25,
         spread: 45,
@@ -646,7 +647,6 @@
       document.getElementById('celebrationText').style.display = 'block';
       document.getElementById('celebrationSubtext').style.display = 'block';
 
-      // Confetti fireworks
       confetti({
         particleCount: 140,
         spread: 80,
