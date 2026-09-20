@@ -108,7 +108,7 @@
       color: #e63964;
     }
 
-    /* Opening Screen Animated Mini AI Avatar */
+    /* Cute Mini AI Avatar Animation */
     .mini-avatar-container {
       margin: 15px auto;
       display: inline-block;
@@ -127,15 +127,9 @@
     }
 
     @keyframes cuteBounce {
-      0%, 100% {
-        transform: translateY(0px) rotate(0deg);
-      }
-      25% {
-        transform: translateY(-8px) rotate(-3deg);
-      }
-      75% {
-        transform: translateY(-4px) rotate(3deg);
-      }
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      25% { transform: translateY(-8px) rotate(-3deg); }
+      75% { transform: translateY(-4px) rotate(3deg); }
     }
 
     p {
@@ -393,10 +387,8 @@
 </head>
 <body>
 
-  <!-- Audio Element using song.mp3 -->
-  <audio id="bgMusic" loop playsinline preload="auto">
-    <source src="song.mp3" type="audio/mpeg">
-  </audio>
+  <!-- Hidden audio element pointing strictly to song.mp3 -->
+  <audio id="bgMusic" src="song.mp3" loop playsinline preload="auto"></audio>
 
   <!-- Music toggle button -->
   <div class="music-btn" id="musicToggle" onclick="toggleMusic()" title="Play / Pause Music">
@@ -407,7 +399,6 @@
   <div class="card" id="screen1">
     <h1>Happy Birthday, <br><span class="highlight">Kamaleshri 🤍🎀</span></h1>
     
-    <!-- Moving cute mini AI cartoon avatar -->
     <div class="mini-avatar-container">
       <img class="mini-avatar-img" 
            src="Image%20(11).jfif.jfif" 
@@ -418,7 +409,7 @@
     <p>A little surprise journey is waiting for you... Ready to unlock it?</p>
 
     <div class="btn-group">
-      <button class="btn-primary" onclick="goToStep(2)" ontouchstart="playSong()">Yes! ✨</button>
+      <button class="btn-primary" onclick="goToStep(2)">Yes! ✨</button>
       <button class="btn-secondary" id="noBtn" onmouseover="dodgeNo()" ontouchstart="dodgeNo()">No</button>
     </div>
   </div>
@@ -554,18 +545,16 @@
     }
     createBgIcons();
 
-    // Direct Audio Activation for Mobile & Desktop
+    // Reliable Direct Audio Player
     const music = document.getElementById('bgMusic');
     const musicToggle = document.getElementById('musicToggle');
-    let isMusicPlaying = false;
 
-    function playSong() {
-      if (!isMusicPlaying) {
+    function startMusic() {
+      if (music.paused) {
         music.play().then(() => {
-          isMusicPlaying = true;
           musicToggle.classList.add('rotating');
-        }).catch(err => {
-          console.log("Audio unlock triggered:", err);
+        }).catch(e => {
+          console.log("Audio play error:", e);
         });
       }
     }
@@ -573,19 +562,17 @@
     function toggleMusic() {
       if (music.paused) {
         music.play().then(() => {
-          isMusicPlaying = true;
           musicToggle.classList.add('rotating');
         });
       } else {
         music.pause();
-        isMusicPlaying = false;
         musicToggle.classList.remove('rotating');
       }
     }
 
     // Step Switcher
     function goToStep(stepNumber) {
-      playSong();
+      startMusic();
 
       for (let i = 1; i <= 7; i++) {
         const screen = document.getElementById('screen' + i);
