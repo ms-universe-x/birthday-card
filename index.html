@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday, Kamali!</title>
+  <title>Happy Birthday, Kamaleshri!</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
   <!-- Canvas Confetti Library -->
@@ -28,7 +28,7 @@
       padding: 20px;
     }
 
-    /* Floating hearts background */
+    /* Floating background items */
     .heart {
       position: fixed;
       font-size: 20px;
@@ -100,6 +100,7 @@
       color: #3f2a32;
       font-size: 26px;
       margin-bottom: 12px;
+      line-height: 1.3;
     }
 
     .highlight {
@@ -157,14 +158,14 @@
       display: none !important;
     }
 
-    /* Step 2: Photo Polaroid */
+    /* Screen 2: Photo Polaroid */
     .polaroid-frame {
       background: white;
-      padding: 12px 12px 20px 12px;
+      padding: 12px 12px 18px 12px;
       border-radius: 8px;
       box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
       transform: rotate(-2deg);
-      margin: 15px auto;
+      margin: 18px auto;
       max-width: 270px;
       border: 1px solid #f0e6e8;
     }
@@ -178,12 +179,12 @@
 
     .polaroid-caption {
       font-family: 'Caveat', cursive;
-      font-size: 22px;
+      font-size: 21px;
       color: #e63964;
       margin-top: 10px;
     }
 
-    /* Step 3: Letter Box */
+    /* Screen 3: Letter Box */
     .letter {
       text-align: left;
       line-height: 1.7;
@@ -202,7 +203,15 @@
       font-size: 22px;
     }
 
-    /* Step 4: Cake & Candle */
+    .letter-sign {
+      text-align: right;
+      margin-top: 18px;
+      font-weight: 600;
+      color: #d35400;
+      font-size: 15px;
+    }
+
+    /* Screen 4: Cake & Candle */
     .cake-container {
       margin: 25px auto 15px auto;
       cursor: pointer;
@@ -244,11 +253,11 @@
 
   <!-- ================= SCREEN 1: Welcome ================= -->
   <div class="card" id="screen1">
-    <h1>Happy Birthday, <br><span class="highlight">Kamali!</span> 🎀</h1>
+    <h1>Happy Birthday, <br><span class="highlight">Kamaleshri 🤍🎀</span></h1>
     
     <img class="illustration" 
          src="https://illustrations.popertee.com/bears.png" 
-         alt="Birthday Bears"
+         alt="Birthday Surprise"
          onerror="this.src='https://cdn-icons-png.flaticon.com/512/4521/4521931.png';">
 
     <p>A little surprise is waiting for you... Are you ready to see what's next?</p>
@@ -259,18 +268,17 @@
     </div>
   </div>
 
-  <!-- ================= SCREEN 2: Memories & Photos ================= -->
+  <!-- ================= SCREEN 2: Memories & Photo ================= -->
   <div class="card hidden" id="screen2">
-    <h1>Cherished Memories 📸</h1>
-    <p>Every moment with you is precious!</p>
+    <h1>Happy Birthday to the Queen! 👑✨</h1>
+    <p>A true friend is the greatest of all blessings! 💕</p>
 
-    <!-- Polaroid Card -->
+    <!-- Polaroid Card (Change photo.jpg to your uploaded image file) -->
     <div class="polaroid-frame">
-      <!-- Replace the src with your own photo filename uploaded to GitHub (e.g. photo.jpg) -->
       <img class="polaroid-img" 
            src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600" 
            alt="Special Memory">
-      <div class="polaroid-caption">Best times together ✨</div>
+      <div class="polaroid-caption">Forever grateful for our friendship 🌸🤍</div>
     </div>
 
     <div class="btn-group">
@@ -282,11 +290,11 @@
   <div class="card hidden" id="screen3">
     <div class="letter">
       <h2>A Message From My Heart ✨</h2>
-      <p><strong>Dear Kamali,</strong></p>
-      <p>Happy Birthday to someone truly special! 🎂</p>
-      <p>You are sweet, thoughtful, and dependable. I am so grateful to celebrate this special day with you.</p>
-      <p>May this coming year bring you immense happiness, great success, sound health, and all the dreams you’ve been working towards!</p>
-      <p style="text-align: right; margin-top: 15px; font-weight: bold; color: #e63964;">— From Your Friend 💐</p>
+      <p><strong>Dear Kamali 🤍,</strong></p>
+      <p>Happy Birthday to a truly beautiful soul! 🎂❤️</p>
+      <p>You’re such a bubbly, talkative, and caring person, with a heart that makes everyone around you feel special. I’m really grateful to have you as a friend and for all the laughter, conversations, and wonderful memories we share. ✨</p>
+      <p>Wishing you lots of happiness, success, good health, and everything your beautiful heart wishes for. Keep smiling, keep shining, and always be the amazing person you are! 🥳💫</p>
+      <div class="letter-sign">— From your friend, MS 🧡</div>
     </div>
 
     <div class="btn-group">
@@ -296,14 +304,14 @@
 
   <!-- ================= SCREEN 4: Blow Candles & Celebration ================= -->
   <div class="card hidden" id="screen4">
-    <h1>Make a Wish, Kamali! 🌟</h1>
+    <h1>Make a Wish, Kamaleshri! 🌟</h1>
     <p class="flame-hint">Tap the cake to blow out candles & celebrate!</p>
 
     <div class="cake-container" onclick="blowCandles()">
       <span class="cake-icon" id="cakeEmoji">🎂</span>
     </div>
 
-    <h2 id="celebrationText" style="color: #e63964; margin-top: 10px; display: none;">🎉 Happy Birthday! 🎉</h2>
+    <h2 id="celebrationText" style="color: #e63964; margin-top: 10px; display: none;">🎉 Happy Birthday, Queen! 🎉</h2>
     <p id="celebrationSubtext" style="display: none;">May all your wishes come true this year!</p>
 
     <div class="btn-group" style="margin-top: 25px;">
@@ -312,9 +320,9 @@
   </div>
 
   <script>
-    // Floating Background Hearts Generator
+    // Floating Background Elements
     function createHearts() {
-      const symbols = ['💖', '🌸', '✨', '💕', '🎈'];
+      const symbols = ['💖', '🌸', '✨', '💕', '👑', '🤍'];
       for (let i = 0; i < 22; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart';
@@ -329,7 +337,6 @@
 
     // Step Switcher
     function goToStep(stepNumber) {
-      // Auto start music on first forward click
       startMusicOnce();
 
       for (let i = 1; i <= 4; i++) {
@@ -357,9 +364,7 @@
         music.play().then(() => {
           musicToggle.classList.add('rotating');
           hasPlayed = true;
-        }).catch(() => {
-          // Autoplay was blocked by browser until direct interaction
-        });
+        }).catch(() => {});
       }
     }
 
@@ -382,25 +387,15 @@
 
       // Confetti burst
       confetti({
-        particleCount: 120,
-        spread: 70,
+        particleCount: 130,
+        spread: 75,
         origin: { y: 0.6 }
       });
 
-      // Side cannons for extra celebration
+      // Side bursts
       setTimeout(() => {
-        confetti({
-          particleCount: 60,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 }
-        });
-        confetti({
-          particleCount: 60,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 }
-        });
+        confetti({ particleCount: 70, angle: 60, spread: 55, origin: { x: 0 } });
+        confetti({ particleCount: 70, angle: 120, spread: 55, origin: { x: 1 } });
       }, 300);
     }
   </script>
