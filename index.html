@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday!</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif;
+    }
+
+    body {
+      background: radial-gradient(circle at center, #fff0f3, #ffd1dc);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .heart {
+      position: absolute;
+      color: rgba(255, 105, 135, 0.4);
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      bottom: -10vh;
+      user-select: none;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8); opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      box-shadow: 0 15px 35px rgba(230, 100, 130, 0.2);
+      padding: 35px 25px;
+      text-align: center;
+      max-width: 380px;
+      width: 90%;
+      z-index: 2;
+      transition: all 0.5s ease;
+    }
+
+    h1 {
+      color: #3b2d2f;
+      font-size: 26px;
+      margin-bottom: 15px;
+    }
+
+    .illustration {
+      width: 170px;
+      margin: 10px auto;
+      display: block;
+    }
+
+    p {
+      color: #6a5358;
+      font-size: 16px;
+      margin: 18px 0;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    button {
+      border: none;
+      padding: 10px 24px;
+      font-size: 15px;
+      font-weight: bold;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-yes {
+      background-color: #d15671;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(209, 86, 113, 0.35);
+    }
+
+    .btn-yes:hover {
+      transform: scale(1.05);
+      background-color: #b7445c;
+    }
+
+    .btn-no {
+      background-color: #f1f1f1;
+      color: #777;
+    }
+
+    .btn-no:hover {
+      transform: scale(0.95);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .letter {
+      text-align: left;
+      line-height: 1.6;
+      font-size: 15px;
+      color: #4b3d40;
+      background: #fff8fa;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px dashed #f2b4c1;
+    }
+
+    .letter h2 {
+      text-align: center;
+      margin-bottom: 12px;
+      color: #b7445c;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen 1 -->
+  <div class="card" id="screen1">
+    <h1>Happy Birthday! 🎀</h1>
+    
+    <img class="illustration" 
+         src="https://cdn-icons-png.flaticon.com/512/4521/4521931.png" 
+         alt="Birthday Bears">
+
+    <p>Are you excited for what's next?</p>
+
+    <div class="btn-group">
+      <button class="btn-yes" onclick="showNextScreen()">Yes</button>
+      <button class="btn-no" id="noBtn" onmouseover="dodgeNo()">No</button>
+    </div>
+  </div>
+
+  <!-- Screen 2 -->
+  <div class="card hidden" id="screen2">
+    <div class="letter">
+      <h2>A Message From My Heart ✨</h2>
+      <p><strong>Happy Birthday to someone truly special! 🎂</strong></p>
+      <p>You are sweet, loyal, and my rock. I am so grateful to have you in my life.</p>
+      <p>May your day be packed with joy, laughter, and everything you've been wishing for!</p>
+    </div>
+  </div>
+
+  <script>
+    function createHearts() {
+      const symbols = ['💖', '🌸', '✨', '💕'];
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        heart.style.animationDelay = (Math.random() * 5) + 's';
+        document.body.appendChild(heart);
+      }
+    }
+    createHearts();
+
+    function showNextScreen() {
+      document.getElementById('screen1').classList.add('hidden');
+      document.getElementById('screen2').classList.remove('hidden');
+    }
+
+    function dodgeNo() {
+      const btn = document.getElementById('noBtn');
+      const randomX = (Math.random() - 0.5) * 120;
+      const randomY = (Math.random() - 0.5) * 80;
+      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+  </script>
+</body>
+</html>
