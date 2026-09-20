@@ -1,410 +1,668 @@
-<style>
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Fredoka', cursive, sans-serif;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday, Kamaleshri!</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Caveat:wght@700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  body {
-    background: radial-gradient(circle at center, #fff2f6, #ffdbe5);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
-    position: relative;
-    padding: 20px;
-  }
-
-  /* Floating background animated icons */
-  .bg-icon {
-    position: fixed;
-    font-size: 20px;
-    animation: floatUp linear infinite;
-    bottom: -10vh;
-    user-select: none;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  @keyframes floatUp {
-    0% {
-      transform: translateY(0) scale(0.8) rotate(0deg);
-      opacity: 0;
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Fredoka', cursive, sans-serif;
     }
-    30% {
-      opacity: 0.7;
+
+    body {
+      background: radial-gradient(circle at center, #fff2f6, #ffdbe5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+      position: relative;
+      padding: 20px;
     }
-    100% {
-      transform: translateY(-115vh) scale(1.3) rotate(360deg);
-      opacity: 0;
+
+    /* Floating background icons */
+    .bg-icon {
+      position: fixed;
+      font-size: 20px;
+      animation: floatUp linear infinite;
+      bottom: -10vh;
+      user-select: none;
+      pointer-events: none;
+      z-index: 1;
     }
-  }
 
-  /* Floating Music Disc Controller */
-  .music-btn {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: #ffffff;
-    border: 2px solid #ff7b9a;
-    box-shadow: 0 4px 12px rgba(255, 123, 154, 0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 20px;
-    z-index: 100;
-    transition: transform 0.2s;
-  }
-
-  .music-btn:hover {
-    transform: scale(1.1);
-  }
-
-  .rotating {
-    animation: spin 3s linear infinite;
-  }
-
-  @keyframes spin {
-    100% {
-      transform: rotate(360deg);
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
+      30% { opacity: 0.7; }
+      100% { transform: translateY(-115vh) scale(1.3) rotate(360deg); opacity: 0; }
     }
-  }
 
-  /* Main Card Container */
-  .card {
-    background: rgba(255, 255, 255, 0.96);
-    border-radius: 28px;
-    box-shadow: 0 20px 45px rgba(255, 130, 160, 0.25);
-    padding: 30px 22px;
-    text-align: center;
-    max-width: 420px;
-    width: 100%;
-    z-index: 10;
-    position: relative;
-    animation: fadeIn 0.5s ease-in-out;
-    display: block;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(18px);
+    /* Music Player Button */
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #ff7b9a;
+      box-shadow: 0 4px 12px rgba(255, 123, 154, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 100;
+      transition: transform 0.2s;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+
+    .music-btn:hover {
+      transform: scale(1.1);
     }
-  }
 
-  h1 {
-    color: #3f2a32;
-    font-size: 25px;
-    margin-bottom: 12px;
-    line-height: 1.3;
-  }
-
-  .highlight {
-    color: #e63964;
-  }
-
-  /* Opening Screen: Animated Mini AI Avatar */
-  .mini-avatar-container {
-    margin: 15px auto;
-    display: inline-block;
-    animation: cuteBounce 2.5s ease-in-out infinite;
-  }
-
-  .mini-avatar-img {
-    width: 145px;
-    height: 145px;
-    border-radius: 50%;
-    border: 4px solid #ff7b9a;
-    box-shadow: 0 10px 25px rgba(255, 123, 154, 0.35);
-    object-fit: cover;
-    object-position: top center;
-    display: block;
-  }
-
-  @keyframes cuteBounce {
-    0%, 100% {
-      transform: translateY(0px) rotate(0deg);
+    .rotating {
+      animation: spin 3s linear infinite;
     }
-    25% {
-      transform: translateY(-8px) rotate(-3deg);
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
     }
-    75% {
-      transform: translateY(-4px) rotate(3deg);
+
+    /* Main Container Card */
+    .card {
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 28px;
+      box-shadow: 0 20px 45px rgba(255, 130, 160, 0.25);
+      padding: 30px 22px;
+      text-align: center;
+      max-width: 420px;
+      width: 100%;
+      z-index: 10;
+      position: relative;
+      animation: fadeIn 0.5s ease-in-out;
+      display: block;
     }
-  }
 
-  p {
-    color: #634b53;
-    font-size: 15px;
-    line-height: 1.6;
-    margin: 12px 0;
-  }
-
-  .btn-group {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-  }
-
-  button {
-    border: none;
-    padding: 12px 26px;
-    font-size: 15px;
-    font-weight: 600;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .btn-primary {
-    background: linear-gradient(135deg, #ff6b8b, #e63964);
-    color: #ffffff;
-    box-shadow: 0 6px 16px rgba(230, 57, 100, 0.35);
-  }
-
-  .btn-primary:hover {
-    transform: scale(1.04);
-    box-shadow: 0 8px 20px rgba(230, 57, 100, 0.45);
-  }
-
-  .btn-secondary {
-    background-color: #f1eff2;
-    color: #796c72;
-  }
-
-  .hidden {
-    display: none !important;
-  }
-
-  /* Screen 2: Polaroid Photo */
-  .polaroid-frame {
-    background: white;
-    padding: 12px 12px 18px 12px;
-    border-radius: 8px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
-    transform: rotate(-2deg);
-    margin: 18px auto;
-    max-width: 270px;
-    border: 1px solid #f0e6e8;
-  }
-
-  .polaroid-img {
-    width: 100%;
-    height: 240px;
-    object-fit: cover;
-    border-radius: 4px;
-    display: block;
-  }
-
-  .polaroid-caption {
-    font-family: 'Caveat', cursive;
-    font-size: 21px;
-    color: #e63964;
-    margin-top: 10px;
-  }
-
-  /* Screen 3: Heartfelt Letter */
-  .letter {
-    text-align: left;
-    line-height: 1.7;
-    font-size: 14.5px;
-    color: #4a343b;
-    background: #fff8fa;
-    padding: 22px;
-    border-radius: 18px;
-    border: 1.5px dashed #f6b5c4;
-  }
-
-  .letter h2 {
-    text-align: center;
-    margin-bottom: 12px;
-    color: #e63964;
-    font-size: 21px;
-  }
-
-  .letter-sign {
-    text-align: right;
-    margin-top: 16px;
-    font-weight: 600;
-    color: #d35400;
-  }
-
-  /* Screen 4: Fix Your Friendship Heart */
-  .heart-puzzle-stage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin: 25px 0 15px 0;
-    position: relative;
-  }
-
-  .dashed-box {
-    width: 130px;
-    height: 130px;
-    border: 2.5px dashed #e63964;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #fff7fa;
-    position: relative;
-    cursor: pointer;
-  }
-
-  .ghost-heart {
-    font-size: 65px;
-    opacity: 0.25;
-    filter: grayscale(0.4);
-    transition: all 0.5s ease;
-  }
-
-  .heart-half-btn {
-    font-size: 48px;
-    cursor: pointer;
-    background: #ffe3ec;
-    border-radius: 50%;
-    width: 65px;
-    height: 65px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(230, 57, 100, 0.2);
-    transition: transform 0.2s;
-  }
-
-  .heart-half-btn:hover {
-    transform: scale(1.15);
-  }
-
-  .mended-full {
-    font-size: 72px !important;
-    opacity: 1 !important;
-    animation: heartPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  @keyframes heartPop {
-    0% {
-      transform: scale(0.3);
-      opacity: 0;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
-    70% {
+
+    h1 {
+      color: #3f2a32;
+      font-size: 25px;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .highlight {
+      color: #e63964;
+    }
+
+    /* Opening Screen Animated Mini AI Avatar */
+    .mini-avatar-container {
+      margin: 15px auto;
+      display: inline-block;
+      animation: cuteBounce 2.5s ease-in-out infinite;
+    }
+
+    .mini-avatar-img {
+      width: 145px;
+      height: 145px;
+      border-radius: 50%;
+      border: 4px solid #ff7b9a;
+      box-shadow: 0 10px 25px rgba(255, 123, 154, 0.35);
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    @keyframes cuteBounce {
+      0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+      }
+      25% {
+        transform: translateY(-8px) rotate(-3deg);
+      }
+      75% {
+        transform: translateY(-4px) rotate(3deg);
+      }
+    }
+
+    p {
+      color: #634b53;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 12px 0;
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    button {
+      border: none;
+      padding: 12px 26px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 14px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ff6b8b, #e63964);
+      color: #ffffff;
+      box-shadow: 0 6px 16px rgba(230, 57, 100, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 20px rgba(230, 57, 100, 0.45);
+    }
+
+    .btn-secondary {
+      background-color: #f1eff2;
+      color: #796c72;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* Screen 2: Polaroid */
+    .polaroid-frame {
+      background: white;
+      padding: 12px 12px 18px 12px;
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+      transform: rotate(-2deg);
+      margin: 18px auto;
+      max-width: 270px;
+      border: 1px solid #f0e6e8;
+    }
+
+    .polaroid-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+    }
+
+    .polaroid-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 21px;
+      color: #e63964;
+      margin-top: 10px;
+    }
+
+    /* Screen 3: Heartfelt Letter */
+    .letter {
+      text-align: left;
+      line-height: 1.7;
+      font-size: 14.5px;
+      color: #4a343b;
+      background: #fff8fa;
+      padding: 22px;
+      border-radius: 18px;
+      border: 1.5px dashed #f6b5c4;
+    }
+
+    .letter h2 {
+      text-align: center;
+      margin-bottom: 12px;
+      color: #e63964;
+      font-size: 21px;
+    }
+
+    .letter-sign {
+      text-align: right;
+      margin-top: 16px;
+      font-weight: 600;
+      color: #d35400;
+    }
+
+    /* Screen 4: Fix Your Friendship Heart */
+    .heart-puzzle-stage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      margin: 25px 0 15px 0;
+      position: relative;
+    }
+
+    .dashed-box {
+      width: 130px;
+      height: 130px;
+      border: 2.5px dashed #e63964;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff7fa;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .ghost-heart {
+      font-size: 65px;
+      opacity: 0.25;
+      filter: grayscale(0.4);
+      transition: all 0.5s ease;
+    }
+
+    .heart-half-btn {
+      font-size: 48px;
+      cursor: pointer;
+      background: #ffe3ec;
+      border-radius: 50%;
+      width: 65px;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(230, 57, 100, 0.2);
+      transition: transform 0.2s;
+    }
+
+    .heart-half-btn:hover {
+      transform: scale(1.15);
+    }
+
+    .mended-full {
+      font-size: 72px !important;
+      opacity: 1 !important;
+      animation: heartPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes heartPop {
+      0% { transform: scale(0.3); opacity: 0; }
+      70% { transform: scale(1.25); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Screen 5: Age & AI Cartoon Poster */
+    .age-card-box {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      margin: 15px 0;
+      padding: 26px 15px 22px 15px;
+      background-size: cover;
+      background-position: center top;
+      background-image: linear-gradient(rgba(255, 245, 248, 0.88), rgba(255, 235, 242, 0.94)), url('Image%20(11).jfif.jfif');
+      border: 2px solid #ffe0ea;
+    }
+
+    .age-pill {
+      display: inline-block;
+      padding: 5px 16px;
+      background: #ffffff;
+      border-radius: 20px;
+      font-size: 13px;
+      color: #9a5369;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .big-age {
+      font-family: 'Playfair Display', serif;
+      font-size: 72px;
+      font-weight: 900;
+      color: #e63964;
+      line-height: 1;
+      margin: 14px 0 4px 0;
+    }
+
+    .avatar-preview {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3.5px solid #ff7b9a;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+      object-fit: cover;
+      object-position: top center;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    /* Screen 6: Balloon Popping */
+    .balloon-counter {
+      font-size: 14px;
+      color: #e63964;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .balloon-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      padding: 10px;
+      min-height: 200px;
+    }
+
+    .balloon-item {
+      font-size: 45px;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.15s ease;
+      animation: gentleFloat 2.5s ease-in-out infinite alternate;
+    }
+
+    .balloon-item:hover {
       transform: scale(1.25);
     }
-    100% {
-      transform: scale(1);
-      opacity: 1;
+
+    @keyframes gentleFloat {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-8px); }
     }
-  }
 
-  /* Screen 5: Age & AI Cartoon Poster */
-  .age-card-box {
-    position: relative;
-    border-radius: 22px;
-    overflow: hidden;
-    margin: 15px 0;
-    padding: 26px 15px 22px 15px;
-    background-size: cover;
-    background-position: center top;
-    background-image: linear-gradient(rgba(255, 245, 248, 0.88), rgba(255, 235, 242, 0.94)), url('Image%20(11).jfif.jfif');
-    border: 2px solid #ffe0ea;
-  }
-
-  .age-pill {
-    display: inline-block;
-    padding: 5px 16px;
-    background: #ffffff;
-    border-radius: 20px;
-    font-size: 13px;
-    color: #9a5369;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-
-  .big-age {
-    font-family: 'Playfair Display', serif;
-    font-size: 72px;
-    font-weight: 900;
-    color: #e63964;
-    line-height: 1;
-    margin: 14px 0 4px 0;
-  }
-
-  /* Avatar preview positioned to show her face and hair fully */
-  .avatar-preview {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 3.5px solid #ff7b9a;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    object-fit: cover;
-    object-position: top center;
-    margin-top: 10px;
-    display: inline-block;
-  }
-
-  /* Screen 6: Balloon Popping */
-  .balloon-counter {
-    font-size: 14px;
-    color: #e63964;
-    font-weight: 600;
-    margin-bottom: 12px;
-  }
-
-  .balloon-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    padding: 10px;
-    min-height: 200px;
-  }
-
-  .balloon-item {
-    font-size: 45px;
-    cursor: pointer;
-    user-select: none;
-    transition: transform 0.15s ease;
-    animation: gentleFloat 2.5s ease-in-out infinite alternate;
-  }
-
-  .balloon-item:hover {
-    transform: scale(1.25);
-  }
-
-  @keyframes gentleFloat {
-    0% {
-      transform: translateY(0px);
+    /* Screen 7: Cake & Celebration */
+    .cake-container {
+      margin: 25px auto 15px auto;
+      cursor: pointer;
+      display: inline-block;
     }
-    100% {
-      transform: translateY(-8px);
+
+    .cake-icon {
+      font-size: 75px;
+      display: block;
+      transition: transform 0.3s;
     }
-  }
 
-  /* Screen 7: Cake & Celebration */
-  .cake-container {
-    margin: 25px auto 15px auto;
-    cursor: pointer;
-    display: inline-block;
-  }
+    .cake-container:hover .cake-icon {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
 
-  .cake-icon {
-    font-size: 75px;
-    display: block;
-    transition: transform 0.3s;
-  }
+  <!-- Audio Element using song.mp3 -->
+  <audio id="bgMusic" loop playsinline preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
 
-  .cake-container:hover .cake-icon {
-    transform: scale(1.1);
-  }
-</style>
+  <!-- Music toggle button -->
+  <div class="music-btn" id="musicToggle" onclick="toggleMusic()" title="Play / Pause Music">
+    🎵
+  </div>
+
+  <!-- ================= SCREEN 1: Welcome ================= -->
+  <div class="card" id="screen1">
+    <h1>Happy Birthday, <br><span class="highlight">Kamaleshri 🤍🎀</span></h1>
+    
+    <!-- Moving cute mini AI cartoon avatar -->
+    <div class="mini-avatar-container">
+      <img class="mini-avatar-img" 
+           src="Image%20(11).jfif.jfif" 
+           alt="Kamali Cartoon"
+           onerror="this.src='https://cdn-icons-png.flaticon.com/512/4521/4521931.png';">
+    </div>
+
+    <p>A little surprise journey is waiting for you... Ready to unlock it?</p>
+
+    <div class="btn-group">
+      <button class="btn-primary" onclick="goToStep(2)" ontouchstart="playSong()">Yes! ✨</button>
+      <button class="btn-secondary" id="noBtn" onmouseover="dodgeNo()" ontouchstart="dodgeNo()">No</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 2: Memories & Photo ================= -->
+  <div class="card hidden" id="screen2">
+    <h1>Happy Birthday to the Queen! 👑✨</h1>
+    <p>A true friend is the greatest of all blessings! 💕</p>
+
+    <div class="polaroid-frame">
+      <img class="polaroid-img" 
+           src="kamali.jpg.jfif" 
+           alt="Special Memory"
+           onerror="this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600';">
+      <div class="polaroid-caption">Forever grateful for our friendship 🌸🤍</div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-primary" onclick="goToStep(3)">Next: A Heartfelt Note 💌</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 3: Heartfelt Letter ================= -->
+  <div class="card hidden" id="screen3">
+    <div class="letter">
+      <h2>A Message From My Heart ✨</h2>
+      <p><strong>Dear Kamali 🤍,</strong></p>
+      <p>Happy Birthday to a truly beautiful soul! 🎂❤️</p>
+      <p>You’re such a bubbly, talkative, and caring person, with a heart that makes everyone around you feel special. I’m really grateful to have you as a friend and for all the laughter, conversations, and wonderful memories we share. ✨</p>
+      <p>Wishing you lots of happiness, success, good health, and everything your beautiful heart wishes for. Keep smiling, keep shining, and always be the amazing person you are! 🥳💫</p>
+      <div class="letter-sign">— From your friend, MS 🧡</div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-primary" onclick="goToStep(4)">Next: Mend The Heart 💖</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 4: Fix Your Friendship Heart ================= -->
+  <div class="card hidden" id="screen4">
+    <div style="font-size: 13px; color: #e63964; font-weight: 600;">💕 MEND THE HEART</div>
+    <h1 style="margin-top: 6px;">Fix your birthday heart</h1>
+    <p style="font-size: 13.5px; color: #7a626a;">Tap the matching heart piece to mend our bond of friendship!</p>
+
+    <div class="heart-puzzle-stage">
+      <div class="dashed-box" id="heartTarget" onclick="mendHeart()">
+        <span class="ghost-heart" id="heartVisual">🤍</span>
+      </div>
+      <div class="heart-half-btn" id="draggableHeart" onclick="mendHeart()" title="Tap to fix!">
+        💖
+      </div>
+    </div>
+
+    <div id="mendedQuote" style="display: none; background: #fff8fa; border-radius: 12px; padding: 12px; border: 1px dashed #f6b5c4;">
+      <p style="font-size: 14px; color: #e63964; font-weight: 600; margin: 0;">"True friendship is two hearts connected as one!" 🌸🤝✨</p>
+    </div>
+
+    <div class="btn-group" id="step4NextBtn" style="display: none;">
+      <button class="btn-primary" onclick="goToStep(5)">Next: Birthday Queen 👑</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 5: Age & AI Cartoon Screen ================= -->
+  <div class="card hidden" id="screen5">
+    <div style="font-size: 13px; color: #e63964; font-weight: 600;">✨ TRIPS AROUND THE SUN ✨</div>
+    
+    <div class="age-card-box">
+      <div class="age-pill">another year of you</div>
+      <div class="big-age">27</div>
+      <div style="font-size: 14px; font-weight: 600; color: #824759; letter-spacing: 2px;">YEARS YOUNG</div>
+      <br>
+      <img src="Image%20(11).jfif.jfif" alt="AI Cartoon Kamali" class="avatar-preview">
+    </div>
+
+    <h2 style="font-size: 20px; color: #3f2a32; margin-top: 10px;">That's your 27th birthday, Kamaleshri! 🤍</h2>
+    <p style="font-size: 14px;">One year older. Same main character energy. 💫</p>
+
+    <div class="btn-group">
+      <button class="btn-primary" onclick="goToStep(6)">Next: Pop Party! 🎈</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 6: Pop The Balloons ================= -->
+  <div class="card hidden" id="screen6">
+    <div style="font-size: 13px; color: #e63964; font-weight: 600;">🎈 POP PARTY</div>
+    <h1 style="margin-top: 6px;">Pop all the balloons!</h1>
+    <div class="balloon-counter" id="balloonCounter">0 / 6 popped</div>
+
+    <div class="balloon-grid" id="balloonGrid">
+      <div class="balloon-item" onclick="popBalloon(this)">🎈</div>
+      <div class="balloon-item" onclick="popBalloon(this)">🤍</div>
+      <div class="balloon-item" onclick="popBalloon(this)">💖</div>
+      <div class="balloon-item" onclick="popBalloon(this)">🎈</div>
+      <div class="balloon-item" onclick="popBalloon(this)">🤍</div>
+      <div class="balloon-item" onclick="popBalloon(this)">💕</div>
+    </div>
+
+    <div class="btn-group" id="step6NextBtn" style="display: none;">
+      <button class="btn-primary" onclick="goToStep(7)">Make a Wish! 🎂</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 7: Cake & Final Wish ================= -->
+  <div class="card hidden" id="screen7">
+    <h1>Make a Wish, Kamaleshri! 🌟</h1>
+    <p id="cakeHint" style="font-size: 13px; color: #e63964; font-weight: bold;">Tap the cake to blow out candles & celebrate!</p>
+
+    <div class="cake-container" onclick="blowCandles()">
+      <span class="cake-icon" id="cakeEmoji">🎂</span>
+    </div>
+
+    <h2 id="celebrationText" style="color: #e63964; margin-top: 10px; display: none;">🎉 Happy Birthday, Queen! 🎉</h2>
+    <p id="celebrationSubtext" style="display: none;">May all your wishes come true this year!</p>
+
+    <div class="btn-group" style="margin-top: 25px;">
+      <button class="btn-secondary" onclick="goToStep(1)">Start Again ↺</button>
+    </div>
+  </div>
+
+  <script>
+    // Floating Background Elements
+    function createBgIcons() {
+      const symbols = ['💖', '🌸', '✨', '💕', '👑', '🤍', '🎈'];
+      for (let i = 0; i < 22; i++) {
+        const icon = document.createElement('div');
+        icon.className = 'bg-icon';
+        icon.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+        icon.style.left = Math.random() * 100 + 'vw';
+        icon.style.animationDuration = (Math.random() * 3.5 + 4) + 's';
+        icon.style.animationDelay = (Math.random() * 5) + 's';
+        document.body.appendChild(icon);
+      }
+    }
+    createBgIcons();
+
+    // Direct Audio Activation for Mobile & Desktop
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isMusicPlaying = false;
+
+    function playSong() {
+      if (!isMusicPlaying) {
+        music.play().then(() => {
+          isMusicPlaying = true;
+          musicToggle.classList.add('rotating');
+        }).catch(err => {
+          console.log("Audio unlock triggered:", err);
+        });
+      }
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play().then(() => {
+          isMusicPlaying = true;
+          musicToggle.classList.add('rotating');
+        });
+      } else {
+        music.pause();
+        isMusicPlaying = false;
+        musicToggle.classList.remove('rotating');
+      }
+    }
+
+    // Step Switcher
+    function goToStep(stepNumber) {
+      playSong();
+
+      for (let i = 1; i <= 7; i++) {
+        const screen = document.getElementById('screen' + i);
+        if (screen) screen.classList.add('hidden');
+      }
+      const target = document.getElementById('screen' + stepNumber);
+      if (target) target.classList.remove('hidden');
+    }
+
+    // Playful dodge for "No" button
+    function dodgeNo() {
+      const btn = document.getElementById('noBtn');
+      const randomX = (Math.random() - 0.5) * 140;
+      const randomY = (Math.random() - 0.5) * 90;
+      btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    // Layer 4: Mend Heart Function
+    let heartMended = false;
+    function mendHeart() {
+      if (heartMended) return;
+      heartMended = true;
+
+      const visual = document.getElementById('heartVisual');
+      visual.innerHTML = '💖';
+      visual.classList.add('mended-full');
+      document.getElementById('draggableHeart').style.display = 'none';
+      document.getElementById('mendedQuote').style.display = 'block';
+      document.getElementById('step4NextBtn').style.display = 'flex';
+
+      confetti({
+        particleCount: 70,
+        spread: 60,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // Layer 6: Balloon Popping Logic
+    let poppedCount = 0;
+    const totalBalloons = 6;
+    function popBalloon(element) {
+      if (element.style.visibility === 'hidden') return;
+      
+      element.style.visibility = 'hidden';
+      poppedCount++;
+      document.getElementById('balloonCounter').innerText = `${poppedCount} / ${totalBalloons} popped`;
+
+      confetti({
+        particleCount: 25,
+        spread: 45,
+        origin: { y: 0.55 }
+      });
+
+      if (poppedCount >= totalBalloons) {
+        document.getElementById('step6NextBtn').style.display = 'flex';
+      }
+    }
+
+    // Layer 7: Candle Blow & Confetti Trigger
+    function blowCandles() {
+      document.getElementById('cakeEmoji').innerHTML = '🍰';
+      const hint = document.getElementById('cakeHint');
+      if (hint) hint.style.display = 'none';
+      document.getElementById('celebrationText').style.display = 'block';
+      document.getElementById('celebrationSubtext').style.display = 'block';
+
+      confetti({
+        particleCount: 140,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+
+      setTimeout(() => {
+        confetti({ particleCount: 75, angle: 60, spread: 55, origin: { x: 0 } });
+        confetti({ particleCount: 75, angle: 120, spread: 55, origin: { x: 1 } });
+      }, 300);
+    }
+  </script>
+</body>
+</html>
