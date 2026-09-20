@@ -3,183 +3,405 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Happy Birthday!</title>
+  <title>Happy Birthday, Kamali!</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Caveat:wght@700&display=swap" rel="stylesheet">
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Comic Sans MS', 'Segoe UI', cursive, sans-serif;
+      font-family: 'Fredoka', cursive, sans-serif;
     }
 
     body {
-      background: radial-gradient(circle at center, #fff0f3, #ffd1dc);
+      background: radial-gradient(circle at center, #fff0f5, #ffd9e2);
       min-height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      overflow-x: hidden;
       position: relative;
+      padding: 20px;
     }
 
+    /* Floating hearts background */
     .heart {
-      position: absolute;
-      color: rgba(255, 105, 135, 0.4);
+      position: fixed;
       font-size: 20px;
-      animation: floatUp 6s linear infinite;
+      animation: floatUp linear infinite;
       bottom: -10vh;
       user-select: none;
+      pointer-events: none;
+      z-index: 1;
     }
 
     @keyframes floatUp {
-      0% { transform: translateY(0) scale(0.8); opacity: 0; }
-      50% { opacity: 0.8; }
-      100% { transform: translateY(-110vh) scale(1.2); opacity: 0; }
+      0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0; }
+      30% { opacity: 0.7; }
+      100% { transform: translateY(-115vh) scale(1.3) rotate(360deg); opacity: 0; }
     }
 
+    /* Floating Music Control */
+    .music-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #ff7b9a;
+      box-shadow: 0 4px 12px rgba(255, 123, 154, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 20px;
+      z-index: 100;
+      transition: transform 0.2s;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .rotating {
+      animation: spin 3s linear infinite;
+    }
+
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Main Container Card */
     .card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 24px;
-      box-shadow: 0 15px 35px rgba(230, 100, 130, 0.2);
-      padding: 35px 25px;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 28px;
+      box-shadow: 0 20px 45px rgba(255, 130, 160, 0.25);
+      padding: 30px 24px;
       text-align: center;
-      max-width: 380px;
-      width: 90%;
-      z-index: 2;
-      transition: all 0.5s ease;
+      max-width: 420px;
+      width: 100%;
+      z-index: 10;
+      position: relative;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
-      color: #3b2d2f;
+      color: #3f2a32;
       font-size: 26px;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
+    }
+
+    .highlight {
+      color: #e63964;
     }
 
     .illustration {
-      width: 170px;
-      margin: 10px auto;
+      width: 160px;
+      margin: 15px auto;
       display: block;
+      border-radius: 12px;
     }
 
     p {
-      color: #6a5358;
-      font-size: 16px;
-      margin: 18px 0;
+      color: #634b53;
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 14px 0;
     }
 
     .btn-group {
       display: flex;
       justify-content: center;
       gap: 15px;
-      margin-top: 15px;
+      margin-top: 20px;
     }
 
     button {
       border: none;
-      padding: 10px 24px;
-      font-size: 15px;
-      font-weight: bold;
-      border-radius: 12px;
+      padding: 12px 28px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 14px;
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
-    .btn-yes {
-      background-color: #d15671;
+    .btn-primary {
+      background: linear-gradient(135deg, #ff6b8b, #e63964);
       color: #ffffff;
-      box-shadow: 0 4px 12px rgba(209, 86, 113, 0.35);
+      box-shadow: 0 6px 16px rgba(230, 57, 100, 0.35);
     }
 
-    .btn-yes:hover {
-      transform: scale(1.05);
-      background-color: #b7445c;
+    .btn-primary:hover {
+      transform: scale(1.04);
+      box-shadow: 0 8px 20px rgba(230, 57, 100, 0.45);
     }
 
-    .btn-no {
-      background-color: #f1f1f1;
-      color: #777;
-    }
-
-    .btn-no:hover {
-      transform: scale(0.95);
+    .btn-secondary {
+      background-color: #f1eff2;
+      color: #796c72;
     }
 
     .hidden {
-      display: none;
+      display: none !important;
     }
 
+    /* Step 2: Photo Polaroid */
+    .polaroid-frame {
+      background: white;
+      padding: 12px 12px 20px 12px;
+      border-radius: 8px;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+      transform: rotate(-2deg);
+      margin: 15px auto;
+      max-width: 270px;
+      border: 1px solid #f0e6e8;
+    }
+
+    .polaroid-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .polaroid-caption {
+      font-family: 'Caveat', cursive;
+      font-size: 22px;
+      color: #e63964;
+      margin-top: 10px;
+    }
+
+    /* Step 3: Letter Box */
     .letter {
       text-align: left;
-      line-height: 1.6;
+      line-height: 1.7;
       font-size: 15px;
-      color: #4b3d40;
+      color: #4a343b;
       background: #fff8fa;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1px dashed #f2b4c1;
+      padding: 22px;
+      border-radius: 18px;
+      border: 1.5px dashed #f6b5c4;
     }
 
     .letter h2 {
       text-align: center;
       margin-bottom: 12px;
-      color: #b7445c;
-      font-size: 20px;
+      color: #e63964;
+      font-size: 22px;
+    }
+
+    /* Step 4: Cake & Candle */
+    .cake-container {
+      margin: 25px auto 15px auto;
+      cursor: pointer;
+      display: inline-block;
+    }
+
+    .cake-icon {
+      font-size: 75px;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .cake-container:hover .cake-icon {
+      transform: scale(1.1);
+    }
+
+    .flame-hint {
+      font-size: 13px;
+      color: #e63964;
+      font-weight: bold;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Screen 1 -->
+  <!-- Background Music Audio -->
+  <audio id="bgMusic" loop src="https://cdn.pixabay.com/download/audio/2022/10/14/audio_9939f792cb.mp3?filename=happy-birthday-to-you-124037.mp3"></audio>
+
+  <!-- Music toggle button -->
+  <div class="music-btn" id="musicToggle" onclick="toggleMusic()" title="Play / Pause Music">
+    🎵
+  </div>
+
+  <!-- ================= SCREEN 1: Welcome ================= -->
   <div class="card" id="screen1">
-    <h1>Happy Birthday! 🎀</h1>
+    <h1>Happy Birthday, <br><span class="highlight">Kamali!</span> 🎀</h1>
     
     <img class="illustration" 
-         src="https://cdn-icons-png.flaticon.com/512/4521/4521931.png" 
-         alt="Birthday Bears">
+         src="https://illustrations.popertee.com/bears.png" 
+         alt="Birthday Bears"
+         onerror="this.src='https://cdn-icons-png.flaticon.com/512/4521/4521931.png';">
 
-    <p>Are you excited for what's next?</p>
+    <p>A little surprise is waiting for you... Are you ready to see what's next?</p>
 
     <div class="btn-group">
-      <button class="btn-yes" onclick="showNextScreen()">Yes</button>
-      <button class="btn-no" id="noBtn" onmouseover="dodgeNo()">No</button>
+      <button class="btn-primary" onclick="goToStep(2)">Yes! ✨</button>
+      <button class="btn-secondary" id="noBtn" onmouseover="dodgeNo()">No</button>
     </div>
   </div>
 
-  <!-- Screen 2 -->
+  <!-- ================= SCREEN 2: Memories & Photos ================= -->
   <div class="card hidden" id="screen2">
+    <h1>Cherished Memories 📸</h1>
+    <p>Every moment with you is precious!</p>
+
+    <!-- Polaroid Card -->
+    <div class="polaroid-frame">
+      <!-- Replace the src with your own photo filename uploaded to GitHub (e.g. photo.jpg) -->
+      <img class="polaroid-img" 
+           src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600" 
+           alt="Special Memory">
+      <div class="polaroid-caption">Best times together ✨</div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-primary" onclick="goToStep(3)">Next: A Heartfelt Note 💌</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 3: Dedicated Letter ================= -->
+  <div class="card hidden" id="screen3">
     <div class="letter">
       <h2>A Message From My Heart ✨</h2>
-      <p><strong>Happy Birthday to someone truly special! 🎂</strong></p>
-      <p>You are sweet, loyal, and my rock. I am so grateful to have you in my life.</p>
-      <p>May your day be packed with joy, laughter, and everything you've been wishing for!</p>
+      <p><strong>Dear Kamali,</strong></p>
+      <p>Happy Birthday to someone truly special! 🎂</p>
+      <p>You are sweet, thoughtful, and dependable. I am so grateful to celebrate this special day with you.</p>
+      <p>May this coming year bring you immense happiness, great success, sound health, and all the dreams you’ve been working towards!</p>
+      <p style="text-align: right; margin-top: 15px; font-weight: bold; color: #e63964;">— From Your Friend 💐</p>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn-primary" onclick="goToStep(4)">Make a Wish! 🎂</button>
+    </div>
+  </div>
+
+  <!-- ================= SCREEN 4: Blow Candles & Celebration ================= -->
+  <div class="card hidden" id="screen4">
+    <h1>Make a Wish, Kamali! 🌟</h1>
+    <p class="flame-hint">Tap the cake to blow out candles & celebrate!</p>
+
+    <div class="cake-container" onclick="blowCandles()">
+      <span class="cake-icon" id="cakeEmoji">🎂</span>
+    </div>
+
+    <h2 id="celebrationText" style="color: #e63964; margin-top: 10px; display: none;">🎉 Happy Birthday! 🎉</h2>
+    <p id="celebrationSubtext" style="display: none;">May all your wishes come true this year!</p>
+
+    <div class="btn-group" style="margin-top: 25px;">
+      <button class="btn-secondary" onclick="goToStep(1)">Start Again ↺</button>
     </div>
   </div>
 
   <script>
+    // Floating Background Hearts Generator
     function createHearts() {
-      const symbols = ['💖', '🌸', '✨', '💕'];
-      for (let i = 0; i < 20; i++) {
+      const symbols = ['💖', '🌸', '✨', '💕', '🎈'];
+      for (let i = 0; i < 22; i++) {
         const heart = document.createElement('div');
         heart.className = 'heart';
         heart.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        heart.style.animationDuration = (Math.random() * 3.5 + 4) + 's';
         heart.style.animationDelay = (Math.random() * 5) + 's';
         document.body.appendChild(heart);
       }
     }
     createHearts();
 
-    function showNextScreen() {
-      document.getElementById('screen1').classList.add('hidden');
-      document.getElementById('screen2').classList.remove('hidden');
+    // Step Switcher
+    function goToStep(stepNumber) {
+      // Auto start music on first forward click
+      startMusicOnce();
+
+      for (let i = 1; i <= 4; i++) {
+        const screen = document.getElementById('screen' + i);
+        if (screen) screen.classList.add('hidden');
+      }
+      document.getElementById('screen' + stepNumber).classList.remove('hidden');
     }
 
+    // Playful dodge for "No" button
     function dodgeNo() {
       const btn = document.getElementById('noBtn');
-      const randomX = (Math.random() - 0.5) * 120;
-      const randomY = (Math.random() - 0.5) * 80;
+      const randomX = (Math.random() - 0.5) * 140;
+      const randomY = (Math.random() - 0.5) * 90;
       btn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    }
+
+    // Audio Controls
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let hasPlayed = false;
+
+    function startMusicOnce() {
+      if (!hasPlayed) {
+        music.play().then(() => {
+          musicToggle.classList.add('rotating');
+          hasPlayed = true;
+        }).catch(() => {
+          // Autoplay was blocked by browser until direct interaction
+        });
+      }
+    }
+
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicToggle.classList.add('rotating');
+      } else {
+        music.pause();
+        musicToggle.classList.remove('rotating');
+      }
+    }
+
+    // Candle Blow & Confetti Trigger
+    function blowCandles() {
+      document.getElementById('cakeEmoji').innerHTML = '🍰';
+      document.querySelector('.flame-hint').style.display = 'none';
+      document.getElementById('celebrationText').style.display = 'block';
+      document.getElementById('celebrationSubtext').style.display = 'block';
+
+      // Confetti burst
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      // Side cannons for extra celebration
+      setTimeout(() => {
+        confetti({
+          particleCount: 60,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 60,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+      }, 300);
     }
   </script>
 </body>
